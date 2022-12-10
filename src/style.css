@@ -22,9 +22,10 @@
 }
 
 .container {
-	display: grid;
-	gap: 4px;
-	place-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 100px;
 }
 
 .btn {
@@ -38,8 +39,9 @@
 	height: 40px;
 	border-radius: 5px;
 	cursor: pointer;
+	margin: 5px;
 }
 
-/* #stop {
+#stop {
 	display: none;
-} */
+}
