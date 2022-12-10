@@ -1,0 +1,19 @@
+{
+  "name": "electron-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Abhishek Porwal",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^22.0.0"
+  },
+  "dependencies": {
+    "screenshot-desktop": "^1.12.7",
+    "socket.io-client": "^4.5.4",
+    "uuid": "^9.0.0"
+  }
+}
