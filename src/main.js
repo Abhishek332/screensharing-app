@@ -1,16 +1,33 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
+const { v4: uuidv4 } = require('uuid');
+const screenshot = require('screenshot-desktop');
+const path = require('path');
+const socket = require('socket.io-client')('http://157.34.221.130:5000');
+
+let interval;
 
 const createWindow = () => {
-	const screen = new BrowserWindow({
+	const mainWindow = new BrowserWindow({
 		height: 400,
 		width: 600,
 		backgroundColor: '#030946',
+		webPreferences: {
+			preload: path.join(__dirname, 'preload.js'),
+		},
 	});
-
-	screen.loadFile(`${__dirname}/index.html`);
+	//mainWindow.removeMenu();
+	mainWindow.loadFile(`${__dirname}/index.html`);
 };
 
-app.whenReady().then(createWindow);
+app.whenReady().then(() => {
+	createWindow();
+
+	app.on('activate', () => {
+		if (BrowserWindow.getAllWindows().length === 0) {
+			createWindow();
+		}
+	});
+});
 
 app.on('window-all-closed', () => {
 	if (process.platform !== 'darwin') {
@@ -18,8 +35,15 @@ app.on('window-all-closed', () => {
 	}
 });
 
-app.on('activate', () => {
-	if (BrowserWindow.getAllWindows().length === 0) {
-		createWindow();
-	}
+ipcMain.on('start-share', (event, arg) => {
+	let uuid = uuidv4();
+	socket.emit('join-message', uuid);
+	event.reply('uuid', uuid);
+	console.log('Starting Sharing');
+	//start share
+});
+
+ipcMain.on('stop-share', (event, arg) => {
+	//stop share
+	console.log('Starting Sharing');
 });
