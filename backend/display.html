@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Codeboard Screencast Viewer</title>
+</head>
+
+<body style="background : linear-gradient(45deg, #7b0909, #6771b8b8)">
+    <img src="" alt="" style="width : 90%; height : 90%; margin : 5%; ">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.4/socket.io.min.js"
+        integrity="sha512-HTENHrkQ/P0NGDFd5nk6ibVtCkcM7jhr2c7GyvXp5O+4X6O5cQO9AhqFzM+MdeBivsX7Hoys2J7pp2wdgMpCvw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        window.onload = () => {
+            const room = prompt('Please Enter Room ID');
+            if (room.trim().length === 0) {
+                document.write('<h1>Room ID is mandatory to join</h1>');
+                return;
+            }
+        }
+    </script>
+</body>
+
+</html>
