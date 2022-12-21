@@ -2,7 +2,7 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const { v4: uuidv4 } = require('uuid');
 const screenshot = require('screenshot-desktop');
 const path = require('path');
-const socket = require('socket.io-client')('http://157.34.221.130:5000');
+const socket = require('socket.io-client')('http://127.0.0.1:5000');
 
 let interval;
 
@@ -35,12 +35,13 @@ app.on('window-all-closed', () => {
 	}
 });
 
+//Listening events trigered from process.js
+//here event is an object contain information of browserWindow from which event triggered
 ipcMain.on('start-share', (event, arg) => {
 	let uuid = uuidv4();
 	socket.emit('join-message', uuid);
 	event.reply('uuid', uuid);
 	console.log('Starting Sharing');
-	//start share
 });
 
 ipcMain.on('stop-share', (event, arg) => {
