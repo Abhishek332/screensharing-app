@@ -11,6 +11,12 @@ io.on('connection', (socket) => {
 		socket.join(roomId);
 		console.log('User joined in a Room', roomId);
 	});
+
+	socket.on('screen-data', (data) => {
+		data = JSON.parse(data);
+		const { room, image } = data;
+		socket.broadcast.to(room).emit('screen-data', image);
+	});
 });
 
 //Listening port for server

@@ -42,6 +42,18 @@ ipcMain.on('start-share', (event, arg) => {
 	socket.emit('join-message', uuid);
 	event.reply('uuid', uuid);
 	console.log('Starting Sharing');
+
+	//taking screenshots and broadcasting
+	interval = setInterval(() => {
+		screenshot.then((img) => {
+			let imgStr = new BufferEncoding(img).toString('base64');
+			let obj = {
+				room: uuid,
+				image: imgStr,
+			};
+			socket.emit('screen-data', JSON.stringify(obj));
+		});
+	}, 100);
 });
 
 ipcMain.on('stop-share', (event, arg) => {

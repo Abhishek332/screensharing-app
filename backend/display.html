@@ -20,6 +20,12 @@
                 document.write('<h1>Room ID is mandatory to join</h1>');
                 return;
             }
+
+            const socket = io.connect('http://127.0.0.1:5000');
+            socket.emit("join-message", room);
+            socket.on('screen-data', (message) => {
+                $("img").attr("src", `data:image/png;base64${message}`);
+            })
         }
     </script>
 </body>
